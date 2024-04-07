@@ -1,4 +1,4 @@
-# docker build -t ml .
+# docker build --platform linux/amd64 -t ml .
 # docker run -p4567:4567 --shm-size=500mb ml
 # Or 
 # docker run -p4567:4567 ml
@@ -19,7 +19,7 @@ COPY . /app
 RUN pip3 install --no-cache-dir --compile -r requirements.txt
 
 # Expose the port your API will run on
-EXPOSE 4567
+EXPOSE 8000
 
 # Define the command to start your API
 CMD ["python3", "model_inference.py"]

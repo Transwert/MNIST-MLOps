@@ -23,10 +23,10 @@ class MNISTInput(BaseModel):
             }
         }
 
-def to_tensor(self):
-    # Convert image data to torch tensor
-    tensor = torch.tensor(self.image).unsqueeze(0).unsqueeze(0).float()
-    return tensor
+    def to_tensor(self):
+        # Convert image data to torch tensor
+        tensor = torch.tensor(self.image).unsqueeze(0).unsqueeze(0).float()
+        return tensor
 
 # Load trained Pipeline
 network = Net()
@@ -53,7 +53,7 @@ def predict(item: MNISTInput):
     predictions = {}
     try:
         # Convert input data to tensor
-        image_tensor = to_tensor(item)
+        image_tensor = MNISTInput.to_tensor(item)
 
         # Perform inference
         with torch.no_grad():
@@ -67,4 +67,4 @@ def predict(item: MNISTInput):
         print("Exception happened: ", e)
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=4567)
+    uvicorn.run(app, host='0.0.0.0', port=8000)
