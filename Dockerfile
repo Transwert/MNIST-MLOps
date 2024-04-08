@@ -1,5 +1,5 @@
-# docker build --platform linux/amd64 -t ml .
-# docker run -p4567:4567 --shm-size=500mb ml
+# docker build --platform linux/amd64 -t ml:0.1.0 .
+# docker run -p4567:4567 --shm-size=500mb ml:0.1.0
 # Or 
 # docker run -p4567:4567 ml
 
