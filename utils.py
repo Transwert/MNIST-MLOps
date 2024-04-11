@@ -16,6 +16,8 @@ class imgGen:
             random_decimal_matrix.append(random_decimal_list)
         return random_decimal_matrix
 
+
+
 # Generate a list of size 28x28
 # mainfunc = imgGen()
 
