@@ -1,6 +1,10 @@
 import torch
 import torchvision
-import os
+from pathlib import Path
+
+# https://stackoverflow.com/questions/918154/relative-paths-in-python
+#using pathlib instead of os library
+
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
@@ -36,7 +40,7 @@ class mnist():
         torch.backends.cudnn.enabled = False
         torch.manual_seed(self.random_seed)
         self.train_loader = torch.utils.data.DataLoader(
-        torchvision.datasets.MNIST('./', train=True, download=True,
+        torchvision.datasets.MNIST(str(Path(__file__).parent), train=True, download=True,
                                     transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(
@@ -45,7 +49,7 @@ class mnist():
         batch_size=self.batch_size_train, shuffle=True)
 
         self.test_loader = torch.utils.data.DataLoader(
-        torchvision.datasets.MNIST('./', train=False, download=True,
+        torchvision.datasets.MNIST(str(Path(__file__).parent), train=False, download=True,
                                     transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(
@@ -64,7 +68,7 @@ class mnist():
         self.test_counter = [i*len(self.train_loader.dataset) for i in range(self.n_epochs + 1)]
     
     def train(self, epoch):
-        self.create_folder_if_not_exists('./model')
+        self.create_folder_if_not_exists(str(Path(__file__).parent)+'/model')
         self.network.train()
         for batch_idx, (data, target) in enumerate(self.train_loader):
             self.optimizer.zero_grad()
@@ -80,8 +84,8 @@ class mnist():
                 self.train_counter.append(
                 (batch_idx*64) + ((epoch-1)*len(self.train_loader.dataset)))
 
-                torch.save(self.network.state_dict(), './model/model.pth')
-                torch.save(self.optimizer.state_dict(), './model/optimizer.pth')
+                torch.save(self.network.state_dict(), str(Path(__file__).parent)+'/model/model.pth')
+                torch.save(self.optimizer.state_dict(), str(Path(__file__).parent)+'/model/optimizer.pth')
 
     def test(self):
         self.network.eval()

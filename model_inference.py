@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, ValidationError, validator
 from typing import List
+from pathlib import Path
 
 import uvicorn
 # import pickle
@@ -30,7 +31,7 @@ class MNISTInput(BaseModel):
 
 # Load trained Pipeline
 network = Net()
-network.load_state_dict(torch.load('./model/model.pth', map_location=torch.device('cpu')))
+network.load_state_dict(torch.load(str(Path(__file__).parent)+'/model/model.pth', map_location=torch.device('cpu')))
 network.eval()
 
 # Function to perform inference on image

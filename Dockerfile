@@ -1,7 +1,7 @@
 # docker build --platform linux/amd64 -t ml:0.1.0 .
-# docker run -p4567:4567 --shm-size=500mb ml:0.1.0
+# docker run -p8000:8000 --shm-size=500mb ml:0.1.0
 # Or 
-# docker run -p4567:4567 ml
+# docker run -p8000:8000 ml:0.1.0
 
 # to stop all containers: docker rm $(docker stop $(docker ps -aq))
 # to remove docker image: docker rmi ml --force

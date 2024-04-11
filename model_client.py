@@ -1,9 +1,15 @@
 import requests
 import json
+from utils import imgGen
+
 
 # Sample input data
+mainFunc = imgGen()
+# input_data = {
+#     "image": [[0.89]*28]*28  # Example input data
+# }
 input_data = {
-    "image": [[0.89]*28]*28  # Example input data
+    "image": mainFunc.randDecMatrix()
 }
 
 # Endpoint URL
